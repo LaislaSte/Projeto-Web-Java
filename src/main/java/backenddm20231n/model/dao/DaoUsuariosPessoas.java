@@ -5,6 +5,7 @@
  */
 package backenddm20231n.model.dao;
 
+import backenddm20231n.model.bean.Usuario;
 import backenddm20231n.model.bean.UsuariosPessoas;
 import backenddm20231n.util.ConexaoDb;
 import java.sql.Connection;
@@ -122,6 +123,23 @@ private final Connection c;
         return peslogs;
    
    }
+
+	public UsuariosPessoas buscarPorUsuario(Usuario usu) throws SQLException {
+		String sql = "select * from usuarios_pessoas WHERE id_u = ?";
+        PreparedStatement stmt = this.c.prepareStatement(sql);
+            stmt.setInt(1,usu.getId());
+            ResultSet rs = stmt.executeQuery();
+            UsuariosPessoas usupesSaida = null;
+            while (rs.next()) {      
+                usupesSaida = new UsuariosPessoas(
+                    rs.getInt(1),
+                    rs.getInt(2),
+                    rs.getInt(3),
+                    rs.getString(4));
+            }
+            stmt.close();
+        return usupesSaida;
+}
 
     
 }

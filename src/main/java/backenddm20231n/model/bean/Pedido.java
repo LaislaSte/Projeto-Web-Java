@@ -20,6 +20,13 @@ public class Pedido {
 		this.idP = idP;
 		this.idL = idL;
 	}
+	
+	public Pedido(int id, int quantidade, String obs) {
+		super();
+		this.id = id;
+		this.quantidade = quantidade;
+		this.obs = obs;
+	}
 
 	public Pedido(int idP, int idL, int quantidade, String obs) {
 		super();

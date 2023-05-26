@@ -60,6 +60,11 @@ public class ControllerComprasPessoas {
 
         return saida;
     }
+    
+    public List<ComprasPessoas> listarPorPessoa(Pessoa pes)  throws SQLException, ClassNotFoundException {
+    	
+    	return null;
+    }
 
 
 }

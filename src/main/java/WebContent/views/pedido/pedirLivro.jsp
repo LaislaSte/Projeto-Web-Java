@@ -11,38 +11,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <title>Avaliar Livro</title>
+    <title>Pedir Livro</title>
 </head>
 
 <body>
 
     <div class="container">
-    
-    <% String idP = (String) request.getParameter("idP");
+      <% 
+      	String idP = (String) request.getParameter("idP");
     	String idL = (String) request.getParameter("idL");
-    %>
-
+    	%>
         <main>
             <div class="row g-5 row-cols-1 row-cols-md-2">
                 <div class=" col py-3">
-                    <form action="../requests/req_avaliarLivro.jsp" method="post" class="d-flex flex-column">
-                        <input type="hidden" value=<%=idP%> name="id_pes">
-                        <input type="hidden" value=<%=idL%> name="id_liv">
+                    <form action="../requests/req_pedirLivro.jsp" method="post" class="d-flex flex-column">
+                        <input type="hidden" value=<%= idP %> name="ID_PES">
+                        <input type="hidden" value=<%= idL %> name="ID_LIV">
                         
-                        <h1 class="text-center mb-3">Avaliação</h1>
-                        <label for="descricao" class="fw-bold">Descrição</label>
-                        <textarea class="mb-2 p-2 border-1" name="descricao" id="descricao" cols="30" rows="5"
-                            placeholder="Descrição da avaliação"></textarea>
-                        <label for="nota" class="fw-bold">Nota</label>
-                        <input class="w-50 border-1 mb-3" name="nota" id="nota" type="number"
-                            placeholder="Nota para o livro">
+                        <h1 class="text-center mb-3">Pedido</h1>
+                        <label for="obs" class="fw-bold">Observação</label>
+                        <textarea class="mb-2 p-2 border-1" name="OBS" id="obs" cols="30" rows="5"
+                            placeholder="Observação para o pedido"></textarea>
+                        <label for="quantidade" class="fw-bold">Quantidade</label>
+                        <input class="w-50 border-1 mb-3" name="QUANTIDADE" id="quantidade" type="number" min="1" max="10"
+                            placeholder="Quantidade de livro">
 
-                        <input type="submit" class=" btn btn-dark w-50" value="Submeter Avaliação">
+                        <input type="submit" class=" btn btn-dark w-50" value="Pedir Livro">
                     </form>
                 </div>
 
                 <div class=" col py-3">
-               		<% ControllerLivro cl = new ControllerLivro();
+                    <% ControllerLivro cl = new ControllerLivro();
                        Livro livro = cl.buscar( new Livro(idL));
 					%>
                     <h1 class="text-center mb-3"><% out.print(livro.getTitulo()); %></h1>

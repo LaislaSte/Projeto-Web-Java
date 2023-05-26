@@ -41,7 +41,7 @@
 			<h1 class="mb-5 text-primary-sutle text-center">Login</h1>
 			<form
 				class="row g-3 needs-validation d-flex flex-row justify-content-center"
-				action="login.jsp" method="post">
+				action="requests/login.jsp" method="post">
 				<div class="text-dark d-flex flex-column align-items-center col-6">
 
 					<div class="row mb-4 w-100 d-flex flex-row justify-content-center">
@@ -67,6 +67,17 @@
 							<button type="submit" class="button btn btn-outline-dark">Acessar</button>
 						</div>
 					</div>
+					
+					<% 
+						String msg = (String) request.getAttribute("mensagem");
+						if(msg!=null){
+					%>
+					<div class="row mb-4 w-100 d-flex flex-row justify-content-start">
+						<div class="col-md-2">
+							<label class="form-label fw-bold"><%out.print(msg); %></label>
+						</div>
+					</div>
+					<% } %>
 
 				</div>
 

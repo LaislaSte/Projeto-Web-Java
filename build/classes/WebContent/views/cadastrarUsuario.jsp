@@ -45,7 +45,7 @@
 			<h1 class="mb-5 text-primary-sutle text-center">Cadastrar Usuario</h1>
 			<form
 				class="row g-3 needs-validation d-flex flex-row justify-content-center"
-				action="../cadastrar.jsp" method="post">
+				action="../requests/cadastrar.jsp" method="post">
 				<div class="text-dark d-flex flex-column align-items-center col-6">
 
 					<div class="row mb-4 w-100 d-flex flex-row justify-content-center">
@@ -113,7 +113,7 @@
 
 					<div class="row mb-4 w-100 d-flex flex-row justify-content-start">
 						<div class="col-md-2">
-							<button type="submit" class="button btn btn-outline-dark">Cadastrar</button>
+							<button type="submit" class="button btn btn-outline-dark">Cadastrar Usuario</button>
 						</div>
 					</div>
 

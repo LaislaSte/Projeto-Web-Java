@@ -1,3 +1,4 @@
+<%@page import="backenddm20231n.model.bean.Pessoa"%>
 <%@page import="backenddm20231n.model.bean.Livro"%>
 <%@page import="java.util.List"%>
 <%@page import="backenddm20231n.controller.ControllerLivro"%>
@@ -22,8 +23,11 @@
 
 	<div class="container">
 
-		<% Usuario usuLogado = (Usuario) session.getAttribute("UsuarioLogado");
-		if (usuLogado != null) {%>
+		<% 
+			Usuario usuLogado = (Usuario) session.getAttribute("UsuarioLogado");
+			if (usuLogado != null) {
+			Pessoa pessoaLogada = (Pessoa) request.getAttribute("PessoaLogada");
+		%>
 
 			<header class="mb-4 border-bottom border-primary-subtle">
 				<nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -46,12 +50,12 @@
 								<li class="nav-item"><a class="nav-link"
 									href="views/pedidos.jsp">Pedidos no Sistema</a></li>
 								<%}%>
-
+								
 								<li class="nav-item"><a class="nav-link active"
-									aria-current="page" href="pedidos.jsp?id=<%=usuLogado.getId()%>">Pedidos</a></li>
+									aria-current="page" href="views/pedidos.jsp?idP=<%=pessoaLogada.getId()%>">Pedidos</a></li>
 								<li class="nav-item"><a class="nav-link"
-									href="avaliacoes.jsp?id=<%=usuLogado.getId()%>">Avaliacoes</a></li>
-								<li class="nav-item"><a class="nav-link" href="compras.jsp?id=<%=usuLogado.getId()%>">Compras Realizadas</a></li>
+									href="views/avaliacoes.jsp?idP=<%=pessoaLogada.getId()%>">Avaliacoes</a></li>
+								<li class="nav-item"><a class="nav-link" href="compras.jsp?idP=<%=pessoaLogada.getId()%>">Compras Realizadas</a></li>
 
 							</ul>
 						</div>
@@ -77,12 +81,64 @@
                         		        <p class="card-text">  <%out.print(livro.getValor()); %> </p>
                         		        
 										<% if (usuLogado.getTipo().equals("ADMIN")) { %>
-											<a href="avaliarLivro.jsp?idL=<%= livro.getId() %>" class="card-link">Editar</a>
-    		                            	<a href="pedirLivro.jsp?idL=<%= livro.getId() %>" class="card-link">Excluir</a>
+											<!-- Button trigger modal -->
+			                            <div class="btn-group gap-2">
+			                                <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
+			                                    data-bs-target="#exampleModal">
+			                                    Editar Livro
+			                                </button>
+			                                <a href="requests/req_excluirLivro.jsp?idL=<%= livro.getId() %>">
+			                                    <button type="button" class="btn btn-outline-danger">
+			                                        Excluir Livro
+			                                    </button>
+			                                </a>
+			                            </div>
+			
+			                            <!-- Modal -->
+			                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+			                                aria-hidden="true">
+			                                <div class="modal-dialog">
+			                                    <div class="modal-content">
+			                                        <form action="requests/req_editarLivro.jsp" method="post">
+			                                            <div class="modal-body d-flex flex-column">
+			                                                <input type="hidden" value=<%= livro.getId() %> name="ID_LIV">
+															
+			                                                <label for="titulo" class="fw-bold">Titulo</label>
+			                                                <input class="w-50 border-1" name="TITULO" id="titulo" type="text"
+			                                                    placeholder="Titulo do livro" value=<%= livro.getTitulo() %> >
+			                                                    
+			                                                <label for="autor" class="fw-bold">Autor</label>
+			                                                <input class="w-50 border-1" name="AUTOR" id="autor" type="text"
+			                                                    placeholder="Autor do livro" value=<%= livro.getAutor() %> >
+			                                                    
+			                                                <label for="genero" class="fw-bold">Genero</label>
+			                                                <input class="w-50 border-1" name="GENERO" id="genero" type="text"
+			                                                    placeholder="Genero do livro" value=<%= livro.getGenero() %> >
+			                                                    
+			                                                <label for="editora" class="fw-bold">Editora</label>
+			                                                <input class="w-50 border-1" name="EDITORA" id="editora" type="text"
+			                                                    placeholder="Editora do livro" value=<%= livro.getEditora() %> >
+			                                                    
+			                                                <label for="valor" class="fw-bold">Valor</label>
+			                                                <input class="w-50 border-1" name="VALOR" id="valor" type="text"
+			                                                    placeholder="Valor do livro" value=<%= livro.getValor() %> >
+			                                                    
+			                                            
+			                                            </div>
+			                                            <div class="modal-footer">
+			                                                <button type="button" class="btn btn-secondary"
+			                                                    data-bs-dismiss="modal">Close</button>
+			                                                <button type="submit" class="btn btn-primary">Salvar Mudancas</button>
+			                                            </div>
+			                                        </form>
+			                                    </div>
+			                                </div>
+			                            </div>
+			                            
 										<% } else { %>
-	        	                        	<a href="views/avaliarLivro.jsp?idP=<%= usuLogado.getId() %>?idL=<%=livro.getId() %>" 
+	        	                        	<a href="views/avaliarLivro.jsp?idP=<%= pessoaLogada.getId() %>?idL=<%=livro.getId() %>" 
 	        	                        	  	class="card-link">Avaliar</a>
-    		                            	<a href="views/pedirLivro.jsp?idP=<%= usuLogado.getId() %>?idL=<%=livro.getId() %>" 
+    		                            	<a href="views/pedirLivro.jsp?idP=<%= pessoaLogada.getId() %>?idL=<%=livro.getId() %>" 
     		                            		class="card-link">Pedir</a>
 										<% } %>
                 		            </div>

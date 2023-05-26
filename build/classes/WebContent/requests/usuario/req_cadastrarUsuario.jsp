@@ -12,8 +12,9 @@
     Usuario usu = new Usuario(login,senha,status,tipo);
     ControllerUsuario usucont = new ControllerUsuario();
     usu = usucont.inserir(usu);
-       
-    response.sendRedirect("index.jsp");
+    
+    session.setAttribute("UsuarioLogado", usu);
+    response.sendRedirect("../views/cadastrarPessoa.jsp");
 
 %>
 

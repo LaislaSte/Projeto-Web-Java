@@ -132,12 +132,11 @@ private final Connection c;
 	}
    
    public Pedido alterar(Pedido livEnt) throws SQLException{
-       String sql = "UPDATE pedidos SET id_l = ?, quantidade = ?, obs = ? WHERE id = ?";
+       String sql = "UPDATE pedidos SET quantidade = ?, obs = ? WHERE id = ?";
        PreparedStatement stmt = c.prepareStatement(sql);
-       stmt.setInt(1,livEnt.getIdL());
-       stmt.setInt(2,livEnt.getQuantidade());
-       stmt.setString(3, livEnt.getObs());
-       stmt.setInt(4,livEnt.getId());
+       stmt.setInt(1,livEnt.getQuantidade());
+       stmt.setString(2, livEnt.getObs());
+       stmt.setInt(3,livEnt.getId());
        
        stmt.execute();
        stmt.close();

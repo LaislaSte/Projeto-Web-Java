@@ -68,6 +68,21 @@ public class ControllerUsuariosPessoas {
 
         return usupesSaida;
     }
+    
+    public UsuariosPessoas buscarPorUsuario(Usuario usu) throws SQLException, ClassNotFoundException  {
+    	 daoUsuPes = new DaoUsuariosPessoas();
+         UsuariosPessoas usupesSaida = daoUsuPes.buscarPorUsuario(usu);
+
+         Usuario usuEnt = new Usuario(usupesSaida.getIdUsuario());
+         contUsu = new ControllerUsuario();
+         usupesSaida.setUsu(contUsu.buscar(usuEnt));
+         
+         Pessoa pes = new Pessoa(usupesSaida.getIdPessoa());
+         contPes = new ControllerPessoa();
+         usupesSaida.setPes(contPes.buscar(pes));
+
+         return usupesSaida;
+    }
 
 
     
